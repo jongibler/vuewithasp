@@ -5,7 +5,7 @@ using TodoApi.Repositories;
 namespace TodoApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class TodoController : ControllerBase {
     private readonly ITodoRepository _repo;
 
