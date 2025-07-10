@@ -3,7 +3,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "vue.volar"
+        "vue.volar",
+        "ms-dotnettools.csharp"
       ]
     }
   }
