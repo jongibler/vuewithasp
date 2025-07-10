@@ -14,7 +14,7 @@
       <li v-for="item in todos" :key="item.id">
         <input type="checkbox" v-model="item.isComplete" @change="updateTodo(item)" />
         <span :style="{ textDecoration: item.isComplete ? 'line-through' : 'none' }">
-          {{ item.name }}
+          {{ item.name }} - {{ getPersonName(item.personId) }}
         </span>
         <button @click="deleteTodo(item.id)">❌</button>
       </li>
@@ -63,6 +63,10 @@ async function updateTodo(item) {
 async function deleteTodo(id) {
   await fetch(`${api}/${id}`, { method: 'DELETE' })
   await fetchTodos()
+}
+
+function getPersonName(personId) {
+  return persons.value.find(p => p.id == personId).name;
 }
 
 onMounted(async () => {
