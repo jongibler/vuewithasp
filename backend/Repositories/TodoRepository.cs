@@ -14,6 +14,22 @@ public class TodoRepository : ITodoRepository {
     public async Task<IEnumerable<TodoItem>> GetAllAsync() =>
         await _context.TodoItems.ToListAsync();
 
+    //Alternative if we want to pass through the DTO instead of resolving name in frontend...
+    public async Task<IEnumerable<TodoItemDto>> GetAllDtosAsync()
+    {
+        var query = from t in _context.TodoItems
+                    join p in _context.Persons on t.PersonId equals p.Id
+                    select new TodoItemDto
+                    {
+                        Id = t.Id,
+                        Name = t.Name,
+                        IsComplete = t.IsComplete,
+                        PersonId = t.PersonId,
+                        PersonName = p.Name
+                    };
+        return await query.ToListAsync();
+    }        
+
     public async Task<TodoItem?> GetByIdAsync(int id) =>
         await _context.TodoItems.FindAsync(id);
 
