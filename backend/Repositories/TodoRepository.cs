@@ -23,7 +23,7 @@ public class TodoRepository : ITodoRepository {
     }
 
     public async Task UpdateAsync(TodoItem item) {
-        _context.Entry(item).State = EntityState.Modified;
+        _context.TodoItems.Update(item);
         await _context.SaveChangesAsync();
     }
 
@@ -33,5 +33,7 @@ public class TodoRepository : ITodoRepository {
             _context.TodoItems.Remove(item);
             await _context.SaveChangesAsync();
         }
+        //one hit altenative. does not work with in-memory provider
+        //await _context.TodoItems.Where(i => i.Id == id).ExecuteDeleteAsync();        
     }
 }

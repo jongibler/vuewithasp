@@ -2,6 +2,11 @@
   <div>
     <form @submit.prevent="addTodo">
       <input v-model="newTodo" placeholder="Add new todo" />
+      <select v-model="selectedPersonId">
+        <option v-for="person in persons" :value="person.id">
+          {{ person.name }}
+        </option>
+      </select>        
       <button>Add</button>
     </form>
 
@@ -21,6 +26,8 @@
 import { ref, onMounted } from 'vue'
 const todos = ref([])
 const newTodo = ref('')
+const persons = ref([])
+const selectedPersonId = ref('');
 
 const api = '/api/todo'
 
@@ -29,12 +36,17 @@ async function fetchTodos() {
   todos.value = await res.json()
 }
 
+async function fetchPersons() {
+  const res = await fetch('api/persons')
+  persons.value = await res.json()
+}
+
 async function addTodo() {
   if (!newTodo.value.trim()) return
   const res = await fetch(api, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: newTodo.value, isComplete: false })
+    body: JSON.stringify({ name: newTodo.value, isComplete: false, personId: selectedPersonId.value })
   })
   newTodo.value = ''
   await fetchTodos()
@@ -53,5 +65,8 @@ async function deleteTodo(id) {
   await fetchTodos()
 }
 
-onMounted(fetchTodos)
+onMounted(async () => {
+  await fetchTodos()
+  await fetchPersons()
+})
 </script>
