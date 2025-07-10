@@ -39,6 +39,7 @@ async function fetchTodos() {
 async function fetchPersons() {
   const res = await fetch('api/persons')
   persons.value = await res.json()
+  selectedPersonId.value = persons.value[0].id;
 }
 
 async function addTodo() {
@@ -66,7 +67,7 @@ async function deleteTodo(id) {
 }
 
 function getPersonName(personId) {
-  return persons.value.find(p => p.id == personId).name;
+  return persons.value.find(p => p.id == personId)?.name;
 }
 
 onMounted(async () => {
