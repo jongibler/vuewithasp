@@ -6,12 +6,10 @@
     </form>
 
     <ul>
-      <li v-for="item in todos" :key="item.id">
-        <input type="checkbox" v-model="item.isComplete" @change="updateTodo(item)" />
-        <span :style="{ textDecoration: item.isComplete ? 'line-through' : 'none' }">
+      <li v-for="item in todos" :key="item.id">        
+        <span>
           {{ item.name }}
-        </span>
-        <button @click="deleteTodo(item.id)">❌</button>
+        </span>        
       </li>
     </ul>
   </div>
@@ -37,19 +35,6 @@ async function addTodo() {
     body: JSON.stringify({ name: newTodo.value, isComplete: false })
   })
   newTodo.value = ''
-  await fetchTodos()
-}
-
-async function updateTodo(item) {
-  await fetch(`${api}/${item.id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(item)
-  })
-}
-
-async function deleteTodo(id) {
-  await fetch(`${api}/${id}`, { method: 'DELETE' })
   await fetchTodos()
 }
 

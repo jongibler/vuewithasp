@@ -28,17 +28,5 @@ public class TodoController : ControllerBase {
         await _repo.AddAsync(item);
         return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
     }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, TodoItem item) {
-        if (id != item.Id) return BadRequest();
-        await _repo.UpdateAsync(item);
-        return NoContent();
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id) {
-        await _repo.DeleteAsync(id);
-        return NoContent();
-    }
+   
 }
