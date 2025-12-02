@@ -8,11 +8,3 @@
 <script setup>
 import TodoList from './components/TodoList.vue'
 </script>
-
-<style>
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  font-family: sans-serif;
-}
-</style>
