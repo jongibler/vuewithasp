@@ -13,7 +13,8 @@ public class PersonsController : ControllerBase
         var testPersonsList = new List<Person>
         {
             new Person { Id = 1, Name = "Person 1"},
-            new Person { Id = 2, Name = "Person 2"}
+            new Person { Id = 2, Name = "Person 2"},
+            new Person { Id = 3, Name = "Person 3"},
         };
         return Ok(testPersonsList);
     }
