@@ -1,4 +1,3 @@
-# 🐈‍⬛ VueJs frontend + Asp.Net Core backend (ToDo List sample)
-Codespaces ready with EF code in-memory
+# 🐈‍⬛ Vite.js vue app frontend + Asp.Net Core backend with EF core in-memory
 
-Run 'npm start' from terminal 😎
+Please to an npm install on /frontend, and on the root directory. Run npm start for both apps to start in parallel.
