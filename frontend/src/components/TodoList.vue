@@ -1,7 +1,7 @@
 <template>
-  <div class="todo-app">
+  <div>
     <form @submit.prevent="addTodo">
-      <input v-model="newTodo" type="text" placeholder="Add new todo" />
+      <input v-model="newTodo" placeholder="Add new todo" />
       <select v-model="selectedPersonId">
         <option v-for="person in persons" :value="person.id">
           {{ person.name }}
