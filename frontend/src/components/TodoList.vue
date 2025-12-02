@@ -1,19 +1,19 @@
 <template>
-  <div>
+  <div class="todo-app">
     <form @submit.prevent="addTodo">
-      <input v-model="newTodo" placeholder="Add new todo" />
+      <input v-model="newTodo" type="text" placeholder="Add new todo" />
       <select v-model="selectedPersonId">
         <option v-for="person in persons" :value="person.id">
           {{ person.name }}
         </option>
       </select>        
-      <button>Add</button>
+      <button :disabled="!newTodo">Add</button>
     </form>
 
     <ul>
       <li v-for="item in todos" :key="item.id">
         <input type="checkbox" v-model="item.isComplete" @change="updateTodo(item)" />
-        <span :style="{ textDecoration: item.isComplete ? 'line-through' : 'none' }">
+        <span :class="{ 'completed': item.isComplete }">
           {{ item.name }} - {{ getPersonName(item.personId) }}
         </span>
         <button @click="deleteTodo(item.id)">❌</button>
@@ -21,6 +21,38 @@
     </ul>
   </div>
 </template>
+
+<style lang="scss">
+form {
+  display: flex;
+  gap: 8px;
+
+  input {
+    flex-grow: 1;
+  }
+
+  button:disabled {
+    filter: grayscale(1);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .completed {
+    text-decoration: line-through;
+    font-style: italic;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
+</style>
 
 <script setup>
 import { ref, onMounted } from 'vue'
