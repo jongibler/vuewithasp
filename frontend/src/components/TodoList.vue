@@ -15,6 +15,10 @@
   </div>
 </template>
 
+<style lang="scss">
+
+</style>
+
 <script setup>
 import { ref, onMounted } from 'vue'
 const todos = ref([])
